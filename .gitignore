@@ -1,0 +1,21 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# pyqa runtime artifacts
+.pyqa-cache/
+out/
+
+# Local documents used for manual testing; never commit user documents
+/scanned_doc.pdf
