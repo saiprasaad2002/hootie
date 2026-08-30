@@ -20,7 +20,10 @@ dependencies = [
 [project.scripts]
 pyqa = "pyqa.cli:run_cli"
 
-[project.optional-dependencies]
+# PEP 735 dependency group: uv installs this by default on `uv sync` / `uv run`,
+# whereas an optional-dependencies extra is pruned unless every command passes
+# --extra dev, which silently removes pytest and ruff mid-session.
+[dependency-groups]
 dev = [
     "pytest>=8",
     "pytest-asyncio>=0.24",
