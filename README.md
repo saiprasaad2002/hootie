@@ -160,6 +160,25 @@ Confirm everything answers before starting:
 pyqa check-connection -c pyqa.toml
 ```
 
+### Hosted providers
+
+`examples/openrouter.toml` is a complete, working [OpenRouter](https://openrouter.ai)
+setup — one key, three stages, a different model on each:
+
+```bash
+export OPENROUTER_API_KEY="sk-or-v1-..."
+pyqa run policy.pdf -c examples/openrouter.toml -o ./out
+```
+
+| Stage | Model | Why this one |
+|---|---|---|
+| Vision | `qwen/qwen3.8-flash` | cheap, and accepts image input |
+| Generate | `qwen/qwen3.8-27b` | dataset quality is decided here |
+| Ground | `upstage/solar-pro4` | a yes/no check, roughly 10× cheaper |
+
+The same shape works for any OpenAI-compatible host — only `base_url` and the
+model names change.
+
 ## Output
 
 `out/dataset.jsonl` — chat/messages format, ingested directly by TRL, Axolotl,

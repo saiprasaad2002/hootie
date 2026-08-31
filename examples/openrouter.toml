@@ -1,0 +1,87 @@
+# pyqa via OpenRouter
+# ===========================================================================
+# OpenRouter speaks the OpenAI protocol, so every stage just needs its
+# base_url pointed at https://openrouter.ai/api/v1.
+#
+# Set your key once in the shell — never in this file, and never on the
+# command line:
+#
+#     export OPENROUTER_API_KEY="sk-or-v1-..."
+#
+# Then:
+#
+#     pyqa check-connection -c examples/openrouter.toml
+#     pyqa inspect  yourdoc.pdf                        # free, no API calls
+#     pyqa run      yourdoc.pdf -c examples/openrouter.toml -o ./out
+#
+# `${OPENROUTER_API_KEY}` has no `:-default` fallback on purpose. If the
+# variable is unset, pyqa fails immediately at config load rather than
+# sending an empty key and returning a puzzling 401 twenty minutes in.
+#
+# Cost note: prices below were current when this file was written and drift.
+# Check https://openrouter.ai/models before a large run, and use
+# `pyqa inspect` to see how many vision calls your document will actually
+# make — usually far fewer than its page count.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Vision — only pages that need OCR, a table re-read, or a figure description.
+# Must be a model that accepts image input.
+# ---------------------------------------------------------------------------
+[vision]
+describe_figures = true
+table_reread     = true
+dpi              = 200
+max_image_edge   = 2000
+concurrency      = 4        # hosted APIs rate-limit; lower than a local vLLM
+# max_vision_pages = 50     # uncomment to cap spend on a long document
+
+[vision.endpoint]
+model    = "qwen/qwen3.8-flash"          # vision-capable, ~$0.15 / $0.47 per Mtok
+base_url = "https://openrouter.ai/api/v1"
+api_key  = "${OPENROUTER_API_KEY}"
+timeout  = 180.0            # page images are large; give them room
+temperature = 0.1           # transcription should be boring and faithful
+
+# ---------------------------------------------------------------------------
+# Generation — the stage that decides dataset quality. Spend here.
+# ---------------------------------------------------------------------------
+[generate]
+pairs_per_chunk = 5
+concurrency     = 4
+system_prompt   = "You are a helpful assistant answering questions about the document."
+
+[generate.endpoint]
+model       = "qwen/qwen3.8-27b"         # ~$0.425 / $2.55 per Mtok
+base_url    = "https://openrouter.ai/api/v1"
+api_key     = "${OPENROUTER_API_KEY}"
+temperature = 0.3           # a little variety in question phrasing
+max_retries = 4
+
+# ---------------------------------------------------------------------------
+# Grounding — "is this answer supported by this passage?" is a much easier
+# task than writing the pairs, so run it on something far cheaper.
+# ---------------------------------------------------------------------------
+[ground]
+enabled       = true
+concurrency   = 4
+keep_on_error = true        # a checker failure must not delete good training data
+
+[ground.endpoint]
+model       = "upstage/solar-pro4"       # ~$0.03 / $0.12 per Mtok
+# model     = "google/gemini-3.5-flash-lite"   # pricier, if solar-pro4 is flaky
+base_url    = "https://openrouter.ai/api/v1"
+api_key     = "${OPENROUTER_API_KEY}"
+temperature = 0.0           # a verdict, not a creative act
+
+# ---------------------------------------------------------------------------
+# Chunking runs locally: no key, no API cost.
+# ---------------------------------------------------------------------------
+[chunk]
+embedding_model = "minishlab/potion-base-32M"
+threshold       = 0.8
+chunk_size      = 1024
+min_chunk_chars = 80
+
+[output]
+dir = "./out"

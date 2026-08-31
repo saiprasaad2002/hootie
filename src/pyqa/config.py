@@ -17,6 +17,9 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
 
 from .errors import ConfigError
+from dotenv import load_dotenv
+
+load_dotenv()
 
 _ENV_PATTERN = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
 

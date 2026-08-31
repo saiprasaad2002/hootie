@@ -63,6 +63,26 @@ def test_example_config_loads(monkeypatch, tmp_path):
     assert 0 < cfg.chunk.threshold < 1
 
 
+def test_openrouter_example_loads(monkeypatch):
+    """The shipped OpenRouter example must stay valid as the schema evolves."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-v1-test")
+    cfg = Config.load("examples/openrouter.toml")
+
+    for endpoint in (cfg.vision.endpoint, cfg.generate.endpoint, cfg.ground.endpoint):
+        assert endpoint.base_url == "https://openrouter.ai/api/v1"
+        assert endpoint.api_key.get_secret_value() == "sk-or-v1-test"
+    # Each stage should use its own model; that cost tiering is the point.
+    assert len({cfg.vision.endpoint.model, cfg.generate.endpoint.model,
+                cfg.ground.endpoint.model}) == 3
+
+
+def test_openrouter_example_fails_without_the_key(monkeypatch):
+    """No `:-default` fallback, so an unset key fails at load, not mid-run."""
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    with pytest.raises(ConfigError, match="OPENROUTER_API_KEY"):
+        Config.load("examples/openrouter.toml")
+
+
 def test_missing_config_file_raises(tmp_path):
     with pytest.raises(ConfigError, match="not found"):
         Config.load(tmp_path / "absent.toml")
