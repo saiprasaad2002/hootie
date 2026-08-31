@@ -7,7 +7,7 @@ name: Release
 # Uses PyPI Trusted Publishing (OIDC) so no API token is ever stored in this
 # repository. One-time setup at https://pypi.org/manage/account/publishing/ :
 #   owner        saiprasaad2002
-#   repository   pyqa
+#   repository   hootie
 #   workflow     release.yml
 #   environment  pypi
 

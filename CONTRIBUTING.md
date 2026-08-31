@@ -6,8 +6,8 @@ are all welcome.
 ## Getting set up
 
 ```bash
-git clone https://github.com/saiprasaad2002/pyqa
-cd pyqa
+git clone https://github.com/saiprasaad2002/hootie
+cd hootie
 make sync        # uv sync + a macOS workaround, see below
 make test
 ```

@@ -1,9 +1,8 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
-    <img src="assets/logo-light.svg" alt="hootie — PDFs into finetuning data" width="320">
-  </picture>
+  <img src="assets/avatar.svg" alt="" width="128">
 </p>
+
+<h1 align="center">hootie</h1>
 
 <p align="center">
   <strong>Turn a PDF into a finetuning-ready QA dataset, using your own OCR and LLM endpoints.</strong>
@@ -13,6 +12,7 @@
   <img src="https://img.shields.io/badge/python-3.12+-4F46E5" alt="Python 3.12+">
   <img src="https://img.shields.io/badge/license-MIT-4F46E5" alt="MIT">
   <img src="https://img.shields.io/badge/endpoints-OpenAI--compatible-4F46E5" alt="OpenAI-compatible">
+  <img src="https://img.shields.io/badge/pypi-hootie-4F46E5" alt="pypi: hootie">
 </p>
 
 ---

@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 84" width="320" height="84" role="img" aria-label="hootie">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="hootie">
   <title>hootie</title>
-  <g transform="translate(4 8) scale(1.05)">
+  <rect width="128" height="128" rx="30" fill="#FDE9A9"/>
+  <g transform="translate(14 15) scale(1.55)">
     <!-- ear tufts, drawn under the body so they read as part of the silhouette -->
     <path d="M13 24 C12 16 14 11 18 9 C22 12 25 16 26 21 Z" fill="#4F46E5"/>
     <path d="M51 24 C52 16 50 11 46 9 C42 12 39 16 38 21 Z" fill="#4F46E5"/>
@@ -23,8 +24,4 @@
     <path d="M24 57 l0 4 M21.5 61 h5 M40 57 l0 4 M37.5 61 h5"
           stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round" fill="none"/>
   </g>
-  <text x="86" y="47" font-family="ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="38" font-weight="700"
-        letter-spacing="-1.2" fill="#0F172A">hootie</text>
-  <text x="87" y="65" font-family="ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="12.5" font-weight="500"
-        letter-spacing="0.2" fill="#475569">PDFs into finetuning data</text>
 </svg>

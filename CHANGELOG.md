@@ -36,5 +36,5 @@ Initial release.
 - Swappable protocols for `Parser`, `VisionEngine`, `Chunker`, and `ChatClient`.
 - `.env` support via `python-dotenv`, and an OpenRouter example config.
 
-[Unreleased]: https://github.com/saiprasaad2002/pyqa/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/saiprasaad2002/pyqa/releases/tag/v0.1.0
+[Unreleased]: https://github.com/saiprasaad2002/hootie/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/saiprasaad2002/hootie/releases/tag/v0.1.0

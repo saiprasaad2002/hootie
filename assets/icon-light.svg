@@ -1,22 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="hootie">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 68" width="64" height="68" role="img" aria-label="hootie">
   <title>hootie</title>
-  <g transform="translate(1 1) scale(1)">
-    <!-- page, with a folded top-right corner -->
-    <path d="M6 4.5h20.5L38 16v25.5a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8.5a4 4 0 0 1 4-4z"
-          fill="none" stroke="#475569" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M26 4.5V13a3 3 0 0 0 3 3h9" fill="none" stroke="#475569"
-          stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-    <!-- lines of text on the page -->
-    <g stroke="#CBD5E1" stroke-width="3" stroke-linecap="round">
-      <path d="M13 24h13"/>
-      <path d="M13 31h8"/>
-    </g>
-    <!-- conversation bubble: the page turning into question-and-answer pairs -->
-    <path d="M32 27h20a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H43l-7.5 6.5V50h-3.5a5 5 0 0 1-5-5V32a5 5 0 0 1 5-5z"
+  <g transform="translate(0 2) scale(1)">
+    <!-- ear tufts, drawn under the body so they read as part of the silhouette -->
+    <path d="M13 24 C12 16 14 11 18 9 C22 12 25 16 26 21 Z" fill="#4F46E5"/>
+    <path d="M51 24 C52 16 50 11 46 9 C42 12 39 16 38 21 Z" fill="#4F46E5"/>
+    <!-- body: one rounded blob, which is what makes an owl an owl -->
+    <path d="M32 9 C46 9 56 20 56 34 C56 48 45 58 32 58 C19 58 8 48 8 34 C8 20 18 9 32 9 Z"
           fill="#4F46E5"/>
-    <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.95">
-      <path d="M36 36h13"/>
-      <path d="M36 43h8"/>
-    </g>
+    <!-- belly -->
+    <ellipse cx="32" cy="45" rx="13" ry="12" fill="#E0E7FF"/>
+    <!-- eye discs: large, and overlapping in the middle -->
+    <circle cx="23" cy="30" r="11" fill="#FFFFFF"/>
+    <circle cx="41" cy="30" r="11" fill="#FFFFFF"/>
+    <!-- pupils, converged slightly inward -->
+    <circle cx="25.5" cy="31" r="5.4" fill="#1E1B4B"/>
+    <circle cx="38.5" cy="31" r="5.4" fill="#1E1B4B"/>
+    <circle cx="27.4" cy="29" r="1.9" fill="#FFFFFF"/>
+    <circle cx="40.4" cy="29" r="1.9" fill="#FFFFFF"/>
+    <!-- beak -->
+    <path d="M32 36 L27.5 41.5 L36.5 41.5 Z" fill="#F59E0B" stroke-linejoin="round"/>
+    <!-- feet -->
+    <path d="M24 57 l0 4 M21.5 61 h5 M40 57 l0 4 M37.5 61 h5"
+          stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round" fill="none"/>
   </g>
 </svg>

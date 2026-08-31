@@ -43,10 +43,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/saiprasaad2002/pyqa"
-Repository = "https://github.com/saiprasaad2002/pyqa"
-Issues = "https://github.com/saiprasaad2002/pyqa/issues"
-Changelog = "https://github.com/saiprasaad2002/pyqa/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/saiprasaad2002/hootie"
+Repository = "https://github.com/saiprasaad2002/hootie"
+Issues = "https://github.com/saiprasaad2002/hootie/issues"
+Changelog = "https://github.com/saiprasaad2002/hootie/blob/main/CHANGELOG.md"
 
 [project.scripts]
 hootie = "hootie.cli:run_cli"
@@ -56,6 +56,7 @@ hootie = "hootie.cli:run_cli"
 # --extra dev, which silently removes pytest and ruff mid-session.
 [dependency-groups]
 dev = [
+    "cairosvg>=2.7",   # rasterizes the avatar and social preview; assets only
     "pytest>=8",
     "pytest-asyncio>=0.24",
     "ruff>=0.6",
