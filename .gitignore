@@ -20,6 +20,11 @@ out/
 # Local documents used for manual testing; never commit user documents
 /scanned_doc.pdf
 
+# Secrets. Never commit these.
+.env
+.env.*
+!.env.example
+
 # Your working config. Ship pyqa.example.toml and examples/*.toml instead —
 # this is the file a real API key eventually gets pasted into.
 /pyqa.toml

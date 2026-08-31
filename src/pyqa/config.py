@@ -14,10 +14,10 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
 
 from .errors import ConfigError
-from dotenv import load_dotenv
 
 load_dotenv()
 
