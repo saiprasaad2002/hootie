@@ -1,4 +1,4 @@
-"""pyqa — turn PDFs into finetuning-ready QA datasets using your own endpoints."""
+"""hootie — turn PDFs into finetuning-ready QA datasets using your own endpoints."""
 
 from __future__ import annotations
 

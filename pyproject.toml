@@ -1,10 +1,34 @@
 [project]
-name = "pyqa"
+name = "hootie"
 version = "0.1.0"
 description = "Turn your PDFs into finetuning-ready QA datasets, using your own OCR and LLM endpoints."
 readme = "README.md"
 requires-python = ">=3.12"
-license = { text = "MIT" }
+# PEP 639: an SPDX expression plus the file. The legacy `{ text = "MIT" }` form
+# and the "License ::" classifier are both deprecated, and recent PyPI rejects
+# uploads that mix the classifier with an SPDX expression.
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Saiprasaad G", email = "81971795+saiprasaad2002@users.noreply.github.com" },
+]
+keywords = [
+    "pdf", "ocr", "llm", "finetuning", "dataset", "synthetic-data",
+    "question-answering", "chunking", "vllm", "openai", "rag",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Markup",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
 dependencies = [
     "pdf-inspector>=1.17",
     "pypdfium2>=5.13",
@@ -18,8 +42,14 @@ dependencies = [
     "python-dotenv>=1.2.3",
 ]
 
+[project.urls]
+Homepage = "https://github.com/saiprasaad2002/pyqa"
+Repository = "https://github.com/saiprasaad2002/pyqa"
+Issues = "https://github.com/saiprasaad2002/pyqa/issues"
+Changelog = "https://github.com/saiprasaad2002/pyqa/blob/main/CHANGELOG.md"
+
 [project.scripts]
-pyqa = "pyqa.cli:run_cli"
+hootie = "hootie.cli:run_cli"
 
 # PEP 735 dependency group: uv installs this by default on `uv sync` / `uv run`,
 # whereas an optional-dependencies extra is pruned unless every command passes
@@ -36,7 +66,19 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pyqa"]
+packages = ["src/hootie"]
+
+[tool.hatch.build.targets.sdist]
+# Ship the tests and fixtures so downstream packagers can verify a build.
+include = [
+    "src/hootie",
+    "tests",
+    "examples",
+    "hootie.example.toml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

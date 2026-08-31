@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from pyqa.config import VisionConfig
-from pyqa.types import FigureRegion, PagePlan, PageTask, ParsedDocument, ParsedPage
-from pyqa.vision import plan_pages, summarize_plan
+from hootie.config import VisionConfig
+from hootie.types import FigureRegion, PagePlan, PageTask, ParsedDocument, ParsedPage
+from hootie.vision import plan_pages, summarize_plan
 
 
 def _doc(*pages: ParsedPage, is_complex: bool = False) -> ParsedDocument:

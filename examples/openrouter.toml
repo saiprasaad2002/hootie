@@ -1,4 +1,4 @@
-# pyqa via OpenRouter
+# hootie via OpenRouter
 # ===========================================================================
 # OpenRouter speaks the OpenAI protocol, so every stage just needs its
 # base_url pointed at https://openrouter.ai/api/v1.
@@ -10,17 +10,17 @@
 #
 # Then:
 #
-#     pyqa check-connection -c examples/openrouter.toml
-#     pyqa inspect  yourdoc.pdf                        # free, no API calls
-#     pyqa run      yourdoc.pdf -c examples/openrouter.toml -o ./out
+#     hootie check-connection -c examples/openrouter.toml
+#     hootie inspect  yourdoc.pdf                        # free, no API calls
+#     hootie run      yourdoc.pdf -c examples/openrouter.toml -o ./out
 #
 # `${OPENROUTER_API_KEY}` has no `:-default` fallback on purpose. If the
-# variable is unset, pyqa fails immediately at config load rather than
+# variable is unset, hootie fails immediately at config load rather than
 # sending an empty key and returning a puzzling 401 twenty minutes in.
 #
 # Cost note: prices below were current when this file was written and drift.
 # Check https://openrouter.ai/models before a large run, and use
-# `pyqa inspect` to see how many vision calls your document will actually
+# `hootie inspect` to see how many vision calls your document will actually
 # make — usually far fewer than its page count.
 # ===========================================================================
 

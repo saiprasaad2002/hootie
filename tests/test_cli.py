@@ -7,7 +7,7 @@ import logging
 
 from typer.testing import CliRunner
 
-from pyqa.cli import app
+from hootie.cli import app
 
 runner = CliRunner()
 
@@ -40,7 +40,7 @@ def test_max_vision_pages_caps_the_projection(figures_pdf):
 
 def test_http_client_loggers_are_quiet():
     """The openai 3.x SDK logs through `httpx2`; leaving it at INFO buries progress."""
-    from pyqa.cli import main
+    from hootie.cli import main
 
     main(verbose=False)
     for name in ("httpx", "httpx2", "httpcore", "httpcore2", "huggingface_hub"):
@@ -49,7 +49,7 @@ def test_http_client_loggers_are_quiet():
 
 def test_run_writes_a_dataset(native_pdf, stub_config, tmp_path):
     """Drive the real `run` command through a config file, as a user would."""
-    config_file = tmp_path / "pyqa.toml"
+    config_file = tmp_path / "hootie.toml"
     endpoint = stub_config.generate.endpoint
     config_file.write_text(
         f"""

@@ -6,9 +6,9 @@ import json
 
 import pytest
 
-from pyqa.errors import PyqaError
-from pyqa.pipeline import run_async
-from pyqa.types import Stage
+from hootie.errors import HootieError
+from hootie.pipeline import run_async
+from hootie.types import Stage
 
 
 async def test_full_run_produces_a_chat_jsonl_dataset(native_pdf, stub_config):
@@ -117,5 +117,5 @@ async def test_native_pdf_makes_no_vision_calls(native_pdf, stub_config, stub):
 
 async def test_missing_generation_endpoint_is_a_clear_error(native_pdf, stub_config):
     stub_config.generate.endpoint = None
-    with pytest.raises(PyqaError, match="no generation endpoint"):
+    with pytest.raises(HootieError, match="no generation endpoint"):
         await run_async(native_pdf, stub_config)

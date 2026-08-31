@@ -5,25 +5,25 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
-from pyqa.config import Config, EndpointConfig, expand_env
-from pyqa.errors import ConfigError
+from hootie.config import Config, EndpointConfig, expand_env
+from hootie.errors import ConfigError
 
 
 def test_env_var_is_expanded(monkeypatch):
-    monkeypatch.setenv("PYQA_TEST_KEY", "sk-abc")
-    assert expand_env("${PYQA_TEST_KEY}") == "sk-abc"
+    monkeypatch.setenv("HOOTIE_TEST_KEY", "sk-abc")
+    assert expand_env("${HOOTIE_TEST_KEY}") == "sk-abc"
 
 
 def test_default_is_used_when_unset(monkeypatch):
-    monkeypatch.delenv("PYQA_ABSENT", raising=False)
-    assert expand_env("${PYQA_ABSENT:-fallback}") == "fallback"
+    monkeypatch.delenv("HOOTIE_ABSENT", raising=False)
+    assert expand_env("${HOOTIE_ABSENT:-fallback}") == "fallback"
 
 
 def test_missing_var_without_default_fails_loudly(monkeypatch):
     """Better to fail at load than to send an empty key and get a puzzling 401."""
-    monkeypatch.delenv("PYQA_ABSENT", raising=False)
+    monkeypatch.delenv("HOOTIE_ABSENT", raising=False)
     with pytest.raises(ConfigError, match="not set"):
-        expand_env("${PYQA_ABSENT}")
+        expand_env("${HOOTIE_ABSENT}")
 
 
 def test_api_key_is_not_exposed_in_repr():
@@ -55,9 +55,9 @@ def test_unknown_keys_are_rejected():
 
 
 def test_example_config_loads(monkeypatch, tmp_path):
-    monkeypatch.setenv("PYQA_API_KEY", "k")
-    monkeypatch.setenv("PYQA_VISION_KEY", "k")
-    cfg = Config.load("pyqa.example.toml")
+    monkeypatch.setenv("HOOTIE_API_KEY", "k")
+    monkeypatch.setenv("HOOTIE_VISION_KEY", "k")
+    cfg = Config.load("hootie.example.toml")
     assert cfg.vision.endpoint.model
     assert cfg.generate.pairs_per_chunk == 5
     assert 0 < cfg.chunk.threshold < 1
@@ -72,8 +72,10 @@ def test_openrouter_example_loads(monkeypatch):
         assert endpoint.base_url == "https://openrouter.ai/api/v1"
         assert endpoint.api_key.get_secret_value() == "sk-or-v1-test"
     # Each stage should use its own model; that cost tiering is the point.
-    assert len({cfg.vision.endpoint.model, cfg.generate.endpoint.model,
-                cfg.ground.endpoint.model}) == 3
+    assert (
+        len({cfg.vision.endpoint.model, cfg.generate.endpoint.model, cfg.ground.endpoint.model})
+        == 3
+    )
 
 
 def test_openrouter_example_fails_without_the_key(monkeypatch):

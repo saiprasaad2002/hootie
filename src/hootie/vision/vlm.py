@@ -14,7 +14,7 @@ from ..errors import VisionError
 from ..types import PagePlan, PageTask
 from .prompts import SYSTEM_BY_TASK, user_prompt
 
-logger = logging.getLogger("pyqa.vision")
+logger = logging.getLogger("hootie.vision")
 
 
 class VlmVisionEngine:

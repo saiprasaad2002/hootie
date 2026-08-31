@@ -13,7 +13,9 @@ wheels/
 .pytest_cache/
 .ruff_cache/
 
-# pyqa runtime artifacts
+# hootie runtime artifacts
+.hootie-cache/
+# legacy paths, from before the rename to hootie
 .pyqa-cache/
 out/
 
@@ -25,6 +27,8 @@ out/
 .env.*
 !.env.example
 
-# Your working config. Ship pyqa.example.toml and examples/*.toml instead —
+# Your working config. Ship hootie.example.toml and examples/*.toml instead —
 # this is the file a real API key eventually gets pasted into.
+/hootie.toml
+# legacy path, from before the rename to hootie
 /pyqa.toml

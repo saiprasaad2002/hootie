@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from pyqa.parsing import assemble_document
-from pyqa.types import ParsedPage
+from hootie.parsing import assemble_document
+from hootie.types import ParsedPage
 
 
 def _pages(*texts: str) -> list[ParsedPage]:

@@ -6,8 +6,8 @@ import httpx
 import pytest
 from openai import APIStatusError, RateLimitError
 
-from pyqa.config import EndpointConfig
-from pyqa.generation import OpenAICompatClient, StructuredMode
+from hootie.config import EndpointConfig
+from hootie.generation import OpenAICompatClient, StructuredMode
 
 SCHEMA = {"type": "object", "properties": {"a": {"type": "integer"}}, "required": ["a"]}
 

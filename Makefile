@@ -1,5 +1,5 @@
 # macOS + uv workaround: uv writes the editable-install .pth with the UF_HIDDEN
-# flag, and CPython's site.addpackage skips hidden .pth files, so `import pyqa`
+# flag, and CPython's site.addpackage skips hidden .pth files, so `import hootie`
 # breaks after every sync. Unhiding it restores the editable install.
 .PHONY: sync test lint fixtures logo
 

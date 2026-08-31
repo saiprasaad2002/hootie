@@ -47,7 +47,7 @@ class SemanticChunkerAdapter:
             from chonkie import SemanticChunker
         except ImportError as exc:  # pragma: no cover - install-time failure
             raise ChunkError(
-                "chonkie is required for semantic chunking; install pyqa with its "
+                "chonkie is required for semantic chunking; install hootie with its "
                 "default dependencies"
             ) from exc
 

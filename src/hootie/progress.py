@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 from .types import Stage
 
-logger = logging.getLogger("pyqa")
+logger = logging.getLogger("hootie")
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,4 +1,4 @@
-# pyqa configuration.
+# hootie configuration.
 #
 # Credentials are never passed on the command line. Use ${VAR} to read an
 # environment variable, or ${VAR:-default} to supply a fallback. A referenced
@@ -8,7 +8,7 @@
 # ---------------------------------------------------------------------------
 # Vision: the only stage that sends page images to a model.
 # Needed only when pages require OCR, carry figures, or have complex tables.
-# Run `pyqa inspect your.pdf` first — it projects the cost without spending it.
+# Run `hootie inspect your.pdf` first — it projects the cost without spending it.
 # ---------------------------------------------------------------------------
 [vision]
 describe_figures = true    # describe charts/diagrams on otherwise-readable pages
@@ -21,10 +21,10 @@ concurrency      = 8
 [vision.endpoint]
 model    = "Qwen/Qwen2.5-VL-7B-Instruct"
 base_url = "http://localhost:8000/v1"
-api_key  = "${PYQA_VISION_KEY:-not-needed}"
+api_key  = "${HOOTIE_VISION_KEY:-not-needed}"
 
 # Thresholds for deciding a page carries a figure worth describing.
-# Tune these with `pyqa inspect` against your own documents.
+# Tune these with `hootie inspect` against your own documents.
 [vision.figures]
 min_raster_area_ratio  = 0.05   # embedded images must cover this share of the page
 min_vector_paths       = 12     # vector paths implying a drawn diagram
@@ -54,7 +54,7 @@ system_prompt   = "You are a helpful assistant answering questions about the doc
 [generate.endpoint]
 model       = "Qwen/Qwen2.5-14B-Instruct"
 base_url    = "http://localhost:8000/v1"
-api_key     = "${PYQA_API_KEY:-not-needed}"
+api_key     = "${HOOTIE_API_KEY:-not-needed}"
 temperature = 0.3
 
 # ---------------------------------------------------------------------------
@@ -70,7 +70,7 @@ keep_on_error = true   # a broken checker must not silently delete good data
 [ground.endpoint]
 model    = "Qwen/Qwen2.5-7B-Instruct"
 base_url = "http://localhost:8000/v1"
-api_key  = "${PYQA_API_KEY:-not-needed}"
+api_key  = "${HOOTIE_API_KEY:-not-needed}"
 
 # ---------------------------------------------------------------------------
 # Output.

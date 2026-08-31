@@ -29,7 +29,7 @@ from ..config import EndpointConfig
 from ..errors import GenerationError
 from .base import StructuredMode
 
-logger = logging.getLogger("pyqa.llm")
+logger = logging.getLogger("hootie.llm")
 
 # Substrings that mark "this server does not support that response_format",
 # as opposed to a request that was malformed for some other reason.

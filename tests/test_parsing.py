@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import pytest
 
-from pyqa.errors import ParseError
-from pyqa.parsing import PdfInspectorParser
-from pyqa.parsing.pdf_inspector import _assert_index_invariant
-from pyqa.types import ParsedPage
+from hootie.errors import ParseError
+from hootie.parsing import PdfInspectorParser
+from hootie.parsing.pdf_inspector import _assert_index_invariant
+from hootie.types import ParsedPage
 
 
 def test_pages_are_one_indexed_and_contiguous(native_pdf):

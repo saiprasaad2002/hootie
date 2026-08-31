@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
-    <img src="assets/logo-light.svg" alt="pyqa — PDFs into finetuning data" width="320">
+    <img src="assets/logo-light.svg" alt="hootie — PDFs into finetuning data" width="320">
   </picture>
 </p>
 
@@ -17,7 +17,7 @@
 
 ---
 
-You point pyqa at a document and an OpenAI-compatible inference server — vLLM,
+You point hootie at a document and an OpenAI-compatible inference server — vLLM,
 TGI, Together, Groq, OpenRouter, Ollama, or OpenAI itself. It parses the PDF,
 reads the parts only a vision model can read, chunks the result semantically,
 generates question-answer pairs, discards the ones that aren't supported by the
@@ -26,13 +26,13 @@ source, and writes JSONL to your disk.
 Built for anyone finetuning a small model on documents they already have: a
 research corpus, product manuals, internal policy, case files, course notes.
 
-**No pyqa-owned network calls, no credentials on the command line, no telemetry.**
+**No hootie-owned network calls, no credentials on the command line, no telemetry.**
 Your documents go only to the endpoints you configure.
 
 ```bash
-pyqa inspect  policy.pdf                        # what will this cost?  (free)
-pyqa chunk    policy.pdf                        # how does it chunk?    (free)
-pyqa run      policy.pdf -c pyqa.toml -o ./out  # build the dataset
+hootie inspect  policy.pdf                        # what will this cost?  (free)
+hootie chunk    policy.pdf                        # how does it chunk?    (free)
+hootie run      policy.pdf -c hootie.toml -o ./out  # build the dataset
 ```
 
 ## How it works
@@ -98,7 +98,7 @@ twice.
 
 Most PDF flowcharts are **drawn with vector path operators and contain no image
 object at all**. Detection that only looks for embedded images misses exactly the
-diagrams that matter most in policy and technical documents, so pyqa looks for
+diagrams that matter most in policy and technical documents, so hootie looks for
 dense vector-path clusters too.
 
 Repeated images are fingerprinted and suppressed — without that, a letterhead
@@ -137,13 +137,13 @@ prebuilt wheels.
 
 ## Configure
 
-Copy `pyqa.example.toml` and edit it. Credentials come from the environment:
+Copy `hootie.example.toml` and edit it. Credentials come from the environment:
 
 ```toml
 [generate.endpoint]
 model    = "Qwen/Qwen2.5-14B-Instruct"
 base_url = "http://localhost:8000/v1"
-api_key  = "${PYQA_API_KEY}"
+api_key  = "${HOOTIE_API_KEY}"
 ```
 
 `${VAR}` and `${VAR:-default}` are expanded at load time. A referenced variable
@@ -157,7 +157,7 @@ Omit `[ground.endpoint]` to reuse the generation endpoint.
 Confirm everything answers before starting:
 
 ```bash
-pyqa check-connection -c pyqa.toml
+hootie check-connection -c hootie.toml
 ```
 
 ### Hosted providers
@@ -167,7 +167,7 @@ setup — one key, three stages, a different model on each:
 
 ```bash
 export OPENROUTER_API_KEY="sk-or-v1-..."
-pyqa run policy.pdf -c examples/openrouter.toml -o ./out
+hootie run policy.pdf -c examples/openrouter.toml -o ./out
 ```
 
 | Stage | Model | Why this one |
@@ -202,7 +202,7 @@ keys.
 
 ## Controlling cost
 
-`pyqa inspect` projects the exact number of vision calls **before** you spend
+`hootie inspect` projects the exact number of vision calls **before** you spend
 anything. It's also where you tune figure-detection thresholds against your own
 documents:
 
@@ -234,9 +234,9 @@ resumes without paying for OCR twice. Use `--no-cache` to force fresh calls.
 
 ```python
 import asyncio
-from pyqa import Config, run_async
+from hootie import Config, run_async
 
-config = Config.load("pyqa.toml")
+config = Config.load("hootie.toml")
 result = asyncio.run(run_async("policy.pdf", config, progress=print))
 
 print(result.manifest["pairs"])       # {'generated': 412, 'kept': 389, ...}
@@ -262,12 +262,12 @@ taking a `ProgressEvent`.
 cache before going offline, or point `chunk.embedding_model` at a local path.
 
 **Structured output.** OpenAI-compatible servers disagree about `response_format`.
-pyqa negotiates once per run — `json_schema` → `json_object` → prompt-only — and
+hootie negotiates once per run — `json_schema` → `json_object` → prompt-only — and
 validates every response locally regardless of which path was taken. The mode it
 settled on is recorded in the manifest.
 
 **macOS + uv.** `uv` writes the editable-install `.pth` file with the macOS hidden
-flag, and CPython deliberately skips hidden `.pth` files, so `import pyqa` breaks
+flag, and CPython deliberately skips hidden `.pth` files, so `import hootie` breaks
 silently after a sync. `make sync` handles it, or run it yourself:
 
 ```bash
@@ -281,10 +281,15 @@ make test   # sync, then run the suite
 make lint   # ruff check + format
 ```
 
-The suite runs against a stub OpenAI-compatible server, so it needs no
-credentials and no network. Regenerate assets and fixtures with:
+The suite runs against a stub OpenAI-compatible server (`tests/stub_server.py`),
+so **no API keys are needed**. It does download a small embedding model from
+HuggingFace the first time the chunker runs; after that the cache is warm and the
+suite is offline. Regenerate assets and fixtures with:
 
 ```bash
 make fixtures
 uv run python assets/make_logo.py
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the subtleties worth knowing before
+changing the parser, planner, or structured-output ladder.

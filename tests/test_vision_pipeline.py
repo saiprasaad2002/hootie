@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from pyqa.pipeline import run_async
+from hootie.pipeline import run_async
 
 
 def _image_requests(state) -> list:

@@ -10,7 +10,7 @@ from ..types import QAPair, SourceChunk
 from .json_utils import extract_json
 from .prompts import QA_SCHEMA, QA_SYSTEM, qa_user_prompt
 
-logger = logging.getLogger("pyqa.generate")
+logger = logging.getLogger("hootie.generate")
 
 # Even in strict json_schema mode a model can return an empty or malformed list,
 # so the response is validated locally regardless of how it was requested.

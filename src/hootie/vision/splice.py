@@ -20,7 +20,7 @@ import pdf_inspector
 
 from ..types import FigureRegion
 
-logger = logging.getLogger("pyqa.vision")
+logger = logging.getLogger("hootie.vision")
 
 _FIGURE_FENCE = re.compile(r"^```figure\b[^\n]*\n(.*?)^```", re.MULTILINE | re.DOTALL)
 # Anchors must be substantial enough to locate unambiguously in the markdown.

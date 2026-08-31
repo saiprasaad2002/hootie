@@ -1,4 +1,4 @@
-"""Generate the pyqa logo assets.
+"""Generate the hootie logo assets.
 
 Two theme variants are generated from one template so they cannot drift. GitHub
 picks between them with <picture media="(prefers-color-scheme: dark)">, which is
@@ -48,11 +48,11 @@ def mark(accent: str, outline: str, rules: str, x: float = 0, y: float = 0, s: f
 
 def lockup(theme: str) -> str:
     accent, word, outline, rules = THEMES[theme]
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 76" width="300" height="76" role="img" aria-label="pyqa">
-  <title>pyqa</title>
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 76" width="300" height="76" role="img" aria-label="hootie">
+  <title>hootie</title>
 {mark(accent, outline, rules, x=2, y=6)}
   <text x="82" y="44" font-family="{FONT}" font-size="38" font-weight="700"
-        letter-spacing="-1.2" fill="{word}">pyqa</text>
+        letter-spacing="-1.2" fill="{word}">hootie</text>
   <text x="83" y="62" font-family="{FONT}" font-size="12.5" font-weight="500"
         letter-spacing="0.2" fill="{outline}">PDFs into finetuning data</text>
 </svg>
@@ -61,8 +61,8 @@ def lockup(theme: str) -> str:
 
 def icon(theme: str) -> str:
     accent, _word, outline, rules = THEMES[theme]
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="pyqa">
-  <title>pyqa</title>
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="hootie">
+  <title>hootie</title>
 {mark(accent, outline, rules, x=1, y=1)}
 </svg>
 """

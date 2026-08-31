@@ -26,7 +26,7 @@ from rich.table import Table
 
 from .chunking import SemanticChunkerAdapter
 from .config import Config
-from .errors import PyqaError
+from .errors import HootieError
 from .parsing import PdfInspectorParser, assemble_document
 from .parsing.assemble import sha256_file
 from .parsing.figures import detect_figures
@@ -35,7 +35,7 @@ from .types import PageTask, Stage
 from .vision import plan_pages, summarize_plan
 
 app = typer.Typer(
-    name="pyqa",
+    name="hootie",
     help="Turn PDFs into finetuning-ready QA datasets using your own OCR and LLM endpoints.",
     no_args_is_help=True,
     add_completion=False,
@@ -44,7 +44,7 @@ console = Console()
 
 ConfigOption = Annotated[
     Path | None,
-    typer.Option("--config", "-c", help="Path to a pyqa TOML config file."),
+    typer.Option("--config", "-c", help="Path to a hootie TOML config file."),
 ]
 
 TASK_STYLE = {
@@ -185,7 +185,7 @@ def chunk(
 
     if not chunks:
         console.print("[yellow]No chunks produced — the document has no extractable text.[/yellow]")
-        console.print("Run [bold]pyqa inspect[/bold] to see whether it needs OCR.")
+        console.print("Run [bold]hootie inspect[/bold] to see whether it needs OCR.")
         return
 
     console.print()
@@ -367,7 +367,7 @@ def run(
 def run_cli() -> None:
     try:
         app()
-    except PyqaError as exc:
+    except HootieError as exc:
         console.print(f"[bold red]error:[/bold red] {exc}")
         raise typer.Exit(1) from exc
 

@@ -81,7 +81,7 @@ class FigureConfig(Base):
     """Thresholds for deciding a page carries visual content worth describing.
 
     Defaults are tuned to catch charts and diagrams while ignoring rules,
-    borders, and letterhead. Tune them with `pyqa inspect` before spending money.
+    borders, and letterhead. Tune them with `hootie inspect` before spending money.
     """
 
     min_raster_area_ratio: float = Field(default=0.05, gt=0, le=1)
@@ -163,7 +163,7 @@ class Config(Base):
     generate: GenerateConfig = Field(default_factory=GenerateConfig)
     ground: GroundConfig = Field(default_factory=GroundConfig)
     output: OutputConfig = Field(default_factory=OutputConfig)
-    cache_dir: Path = Path(".pyqa-cache")
+    cache_dir: Path = Path(".hootie-cache")
     use_cache: bool = True
 
     @model_validator(mode="after")

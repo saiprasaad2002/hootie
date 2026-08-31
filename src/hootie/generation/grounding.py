@@ -14,7 +14,7 @@ from ..types import QAPair, SourceChunk
 from .json_utils import extract_json
 from .prompts import GROUNDING_SCHEMA, GROUNDING_SYSTEM, grounding_user_prompt
 
-logger = logging.getLogger("pyqa.ground")
+logger = logging.getLogger("hootie.ground")
 
 
 class GroundingChecker:

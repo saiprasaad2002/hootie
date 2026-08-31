@@ -25,7 +25,7 @@ from typing import Any
 from . import __version__
 from .chunking import SemanticChunkerAdapter
 from .config import Config
-from .errors import PyqaError, StageBudgetExceeded
+from .errors import HootieError, StageBudgetExceeded
 from .generation import OpenAICompatClient
 from .generation.grounding import GroundingChecker
 from .generation.qagen import QAGenerator
@@ -48,7 +48,7 @@ from .vision.splice import anchor_text, normalize_blocks, splice
 from .vision.vlm import VlmVisionEngine
 from .writers import write_dataset, write_manifest, write_rejected
 
-logger = logging.getLogger("pyqa")
+logger = logging.getLogger("hootie")
 
 
 @dataclass
@@ -123,14 +123,14 @@ async def run_async(
     reporter.finish(Stage.CHUNK, f"{len(chunks)} chunks")
 
     if not chunks:
-        raise PyqaError(
+        raise HootieError(
             "no chunks were produced. The document may have no extractable text; "
-            "run `pyqa inspect` to see whether it needs OCR."
+            "run `hootie inspect` to see whether it needs OCR."
         )
 
     # ---- 5/6. generate and ground ---------------------------------------
     if config.generate.endpoint is None:
-        raise PyqaError(
+        raise HootieError(
             "no generation endpoint is configured. Add a [generate.endpoint] "
             "section to your config file."
         )
@@ -172,7 +172,7 @@ async def run_async(
 
     counts = summarize_plan(plans)
     manifest = {
-        "pyqa_version": __version__,
+        "hootie_version": __version__,
         "source": {
             "path": str(pdf),
             "sha256": digest,
@@ -230,7 +230,7 @@ async def _run_vision(
         return {}
 
     if config.vision.endpoint is None:
-        raise PyqaError(
+        raise HootieError(
             f"{len(billable)} page(s) need a vision model but no [vision.endpoint] "
             "is configured. Add one, or disable the optional work with "
             "--no-figures / --no-table-reread."

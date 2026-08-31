@@ -8,16 +8,16 @@ from __future__ import annotations
 
 import pytest
 
-from pyqa.chunking.semantic import (
+from hootie.chunking.semantic import (
     FIGURE_BLOCK,
     SemanticChunkerAdapter,
     _merge_short,
     _page_at,
     _repair_figure_blocks,
 )
-from pyqa.config import ChunkConfig
-from pyqa.parsing import assemble_document
-from pyqa.types import ParsedPage
+from hootie.config import ChunkConfig
+from hootie.parsing import assemble_document
+from hootie.types import ParsedPage
 
 
 @pytest.fixture

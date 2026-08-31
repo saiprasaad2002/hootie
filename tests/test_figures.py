@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pypdfium2 as pdfium
 
-from pyqa.config import FigureConfig
-from pyqa.parsing.figures import _raster_figures, detect_figures
+from hootie.config import FigureConfig
+from hootie.parsing.figures import _raster_figures, detect_figures
 
 
 def test_detects_vector_flowchart_not_just_raster(figures_pdf):

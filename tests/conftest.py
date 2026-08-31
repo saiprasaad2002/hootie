@@ -51,7 +51,7 @@ def stub():
 @pytest.fixture
 def stub_config(stub, tmp_path):
     """A Config wired to the stub, writing into a temp directory."""
-    from pyqa.config import Config, EndpointConfig
+    from hootie.config import Config, EndpointConfig
 
     _, base_url = stub
     endpoint = EndpointConfig(model="stub-model", base_url=base_url)
