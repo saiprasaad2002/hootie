@@ -6,6 +6,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- README documents installing from PyPI with uv and pip, rather than the
+  contributor-oriented `uv sync`, and explains the `No matching distribution
+  found` error a pre-3.12 interpreter produces.
+
 ## [0.1.0] - 2026-09-01
 
 Initial release.

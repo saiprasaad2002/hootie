@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/python-3.12+-4F46E5" alt="Python 3.12+">
-  <img src="https://img.shields.io/badge/license-MIT-4F46E5" alt="MIT">
+  <a href="https://pypi.org/project/hootie/"><img src="https://img.shields.io/pypi/v/hootie?color=4F46E5&label=pypi" alt="PyPI"></a>
+  <a href="https://pypi.org/project/hootie/"><img src="https://img.shields.io/pypi/pyversions/hootie?color=4F46E5" alt="Python versions"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-4F46E5" alt="MIT"></a>
   <img src="https://img.shields.io/badge/endpoints-OpenAI--compatible-4F46E5" alt="OpenAI-compatible">
-  <img src="https://img.shields.io/badge/pypi-hootie-4F46E5" alt="pypi: hootie">
 </p>
 
 ---
@@ -128,12 +128,50 @@ document and one that teaches it to hallucinate confidently.
 
 ## Install
 
+Requires **Python 3.12+**. No system dependencies — PDF parsing and page
+rendering ship as prebuilt wheels, so there is no Tesseract, poppler, or
+pandoc to install.
+
+### With uv
+
+Run it without installing anything — uv fetches a suitable Python for you:
+
 ```bash
-uv sync
+uvx hootie inspect policy.pdf
 ```
 
-Python 3.12+. No system dependencies — PDF parsing and rendering ship as
-prebuilt wheels.
+Install the CLI permanently:
+
+```bash
+uv tool install hootie
+```
+
+Or add it to a project:
+
+```bash
+uv add hootie
+```
+
+### With pip
+
+```bash
+python -m pip install hootie
+```
+
+### Verify
+
+```bash
+hootie --help
+hootie inspect yourfile.pdf     # needs no credentials
+```
+
+> **`No matching distribution found for hootie`?**
+> You are almost certainly on Python 3.11 or older. pip reports this in two
+> lines and the useful one comes first:
+> `Ignored the following versions that require a different python version:
+> 0.1.0 Requires-Python >=3.12`.
+> Check with `python -V`, then install onto 3.12+ — or sidestep it entirely
+> with `uvx hootie`, which fetches its own interpreter.
 
 ## Configure
 
@@ -277,7 +315,10 @@ chflags nohidden .venv/lib/python*/site-packages/*.pth
 ## Development
 
 ```bash
-make test   # sync, then run the suite
+git clone https://github.com/saiprasaad2002/hootie
+cd hootie
+make sync   # uv sync, plus a macOS editable-install workaround
+make test   # run the suite
 make lint   # ruff check + format
 ```
 
@@ -287,8 +328,8 @@ HuggingFace the first time the chunker runs; after that the cache is warm and th
 suite is offline. Regenerate assets and fixtures with:
 
 ```bash
-make fixtures
-uv run python assets/make_logo.py
+make fixtures   # regenerate the test PDFs
+make logo       # regenerate the mascot, icons, avatar and social card
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the subtleties worth knowing before
